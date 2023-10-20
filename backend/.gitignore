@@ -1,2 +1,5 @@
 .env
 node_modules
+.gitignore
+gitignore
+test_database.db
