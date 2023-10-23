@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
   development: {
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
@@ -9,8 +9,9 @@ module.exports = {
   test: {
     database: "test_database",
     dialect: "sqlite",
-    storage: `./__tests__/test_database.db`,
+    storage: "./__tests__/test_database.db",
   },
-
   production: {},
 };
+
+export default config;
