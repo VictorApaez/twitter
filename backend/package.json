@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@apollo/server": "^4.9.4",
     "dotenv": "^16.3.1",
+    "graphql": "^16.8.1",
     "mysql2": "^3.6.2"
   },
   "devDependencies": {
@@ -21,5 +23,6 @@
   },
   "jest": {
     "testEnvironment": "node"
-  }
+  },
+  "type": "module"
 }
