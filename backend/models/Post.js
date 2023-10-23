@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const Post = sequelize.define(
     "Post",
     {
@@ -35,6 +35,10 @@ module.exports = (sequelize, DataTypes) => {
       as: "user",
       onDelete: "CASCADE",
       onUpdate: "CASCADE",
+    });
+    Post.hasMany(models.Comment, {
+      foreignKey: "postId",
+      as: "comments",
     });
   };
 
