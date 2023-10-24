@@ -1,4 +1,5 @@
-const { sequelize, User, Post } = require("../../models");
+import db from "../../models/index.js";
+const { sequelize, User, Post, Comment } = db;
 
 describe("The Post Model", () => {
   beforeEach(async () => {

@@ -1,8 +1,10 @@
-const { sequelize, User, Post, Comment } = require("../../models");
+import db from "../../models/index.js";
+const { sequelize, User, Post, Comment } = db;
+
 const generateID = () => Math.floor(Math.random() * 100000).toString();
 
 describe("Associations", () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     await sequelize.sync({ force: true });
   });
 

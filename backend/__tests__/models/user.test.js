@@ -1,12 +1,16 @@
-const { sequelize, User } = require("../../models");
+import db from "../../models/index.js";
+const { sequelize, User } = db;
 
 describe("The User Model", () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     await sequelize.sync({ force: true });
   });
 
   afterAll(async () => {
     await sequelize.close();
+  });
+  afterEach(async () => {
+    await User.destroy({ where: {} });
   });
 
   it("should create a new user", async () => {
