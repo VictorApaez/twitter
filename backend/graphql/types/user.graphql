@@ -1,0 +1,13 @@
+type User {
+  id: ID!
+  auth0Id: String!
+  displayName: String!
+  bio: String
+  posts: [Post!]!
+  comments: [Comment!]!
+}
+
+extend type Query {
+  users: [User!]!
+  user(id: ID!): User
+}

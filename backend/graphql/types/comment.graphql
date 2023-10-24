@@ -1,0 +1,18 @@
+type Comment {
+  id: ID!
+  postId: ID!
+  userId: ID!
+  parentId: ID
+  content: String!
+  createdAt: String!
+  updatedAt: String!
+  user: User!
+  post: Post!
+  parentComment: Comment
+  replies: [Comment!]!
+}
+
+extend type Query {
+  comments: [Comment!]!
+  comment(id: ID!): Comment
+}
