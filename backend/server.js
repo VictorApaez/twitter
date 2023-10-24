@@ -1,17 +1,13 @@
-require("dotenv").config();
-const db = require("./models");
+import db from "./models/index.js";
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
+import { resolvers, typeDefs } from "./graphql/index.js";
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
 
-console.log(db.User);
-
-db.User.findAll()
-  .then((users) => {
-    users.forEach((user) => {
-      console.log(user.toJSON());
-    });
-  })
-  .catch((err) => {
-    console.error("Error retrieving users:", err);
-  })
-  .finally(() => {
-    db.sequelize.close();
-  });
+const { url } = await startStandaloneServer(server, {
+  listen: { port: 4000 },
+});
+console.log(`🚀  Server ready at: ${url}`);
