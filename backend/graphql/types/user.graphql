@@ -11,3 +11,20 @@ extend type Query {
   users: [User!]!
   user(id: ID!): User
 }
+
+input CreateUserInput {
+  auth0Id: String!
+  displayName: String!
+  bio: String
+}
+
+input UpdateUserInput {
+  displayName: String
+  bio: String
+}
+
+extend type Mutation {
+  createUser(input: CreateUserInput!): User!
+  updateUser(id: ID!, input: UpdateUserInput!): User!
+  deleteUser(id: ID!): Boolean!
+}

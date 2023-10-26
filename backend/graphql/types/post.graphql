@@ -10,3 +10,9 @@ extend type Query {
   posts: [Post!]!
   post(id: ID!): Post
 }
+
+extend type Mutation {
+  createPost(userId: ID!, content: String!): Post!
+  updatePost(id: ID!, content: String!): Post
+  deletePost(id: ID!): Boolean!
+}
