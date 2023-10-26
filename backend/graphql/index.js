@@ -2,9 +2,21 @@ import fs from "fs";
 import path from "path";
 import { mergeTypeDefs } from "@graphql-tools/merge";
 
-import userResolvers from "./resolvers/userResolvers.js";
-import postResolvers from "./resolvers/postResolvers.js";
-import commentResolvers from "./resolvers/commentResolvers.js";
+//user resolvers
+import userFields from "./resolvers/fields/userFields.js";
+import userMutation from "./resolvers/mutations/userMutations.js";
+import userQuery from "./resolvers/query/userQueries.js";
+
+//post resolvers
+import postFields from "./resolvers/fields/postFields.js";
+import postQueries from "./resolvers/query/postQueries.js";
+import postMutations from "./resolvers/mutations/postMutations.js";
+
+//comment resolvers
+import commentFields from "./resolvers/fields/commentFields.js";
+import commentQueries from "./resolvers/query/commentQueries.js";
+import commentMutations from "./resolvers/mutations/commentMutations.js";
+
 import pkg from "lodash";
 const { merge } = pkg;
 
@@ -24,6 +36,16 @@ const typeDefsArray = typeFiles.map((file) =>
 
 // Merge type definitions
 const typeDefs = mergeTypeDefs(typeDefsArray);
-const resolvers = merge(userResolvers, postResolvers, commentResolvers);
+const resolvers = merge(
+  userFields,
+  userMutation,
+  userQuery,
+  postFields,
+  postQueries,
+  postMutations,
+  commentFields,
+  commentQueries,
+  commentMutations
+);
 
 export { typeDefs, resolvers };
