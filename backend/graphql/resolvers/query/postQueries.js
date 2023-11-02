@@ -3,8 +3,13 @@ const { Post, Comment } = db;
 
 export default {
   Query: {
-    posts: () =>
-      Post.findAll({
+    posts: (parent, args, context, info) => {
+      console.log(context);
+      if (!context.user) {
+        throw new Error("You must be authenticated to view posts. :(");
+      }
+
+      return Post.findAll({
         include: [
           {
             model: Comment,
@@ -15,8 +20,13 @@ export default {
             ],
           },
         ],
-      }),
-    post: (_, { id }) => {
+      });
+    },
+    post: (_, { id }, context) => {
+      if (!context.user) {
+        throw new Error("You must be authenticated to view the post.");
+      }
+
       const post = Post.findByPk(id, {
         include: [
           {
