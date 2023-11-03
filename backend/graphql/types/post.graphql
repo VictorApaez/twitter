@@ -12,7 +12,7 @@ extend type Query {
 }
 
 extend type Mutation {
-  createPost(userId: ID!, content: String!): Post!
-  updatePost(id: ID!, content: String!): Post
-  deletePost(id: ID!): Boolean!
+  createPost(content: String!): Post!
+  updatePost(postId: ID!, content: String!): Post
+  deletePost(postId: ID!): Boolean!
 }
