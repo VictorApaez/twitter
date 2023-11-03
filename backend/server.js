@@ -1,15 +1,17 @@
+import db from "./models/index.js";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { typeDefs, resolvers } from "./graphql/index.js";
 import jwt from "jsonwebtoken";
 import jwksClient from "jwks-rsa";
 import dotenv from "dotenv";
+
 dotenv.config();
 
 const app = express();
 
 const client = jwksClient({
-  jwksUri: `https://dev-q0lfml8y40meyltz.us.auth0.com/.well-known/jwks.json`,
+  jwksUri: `${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`,
 });
 
 function getKey(header, callback) {
@@ -17,7 +19,6 @@ function getKey(header, callback) {
     if (err) {
       return callback(err);
     }
-
     const signingKey = key.getPublicKey();
     callback(null, signingKey);
   });
@@ -27,14 +28,14 @@ function authenticate(req, res, next) {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    req.user = null;
+    req.authPayload = null;
     return next();
   }
 
   const token = authHeader.split("Bearer ")[1];
 
   if (!token) {
-    req.user = null;
+    req.authPayload = null;
     return next();
   }
 
@@ -42,16 +43,16 @@ function authenticate(req, res, next) {
     token,
     getKey,
     {
-      audience: "https://mygraphqlapi.example.com/", // AKA identifier
-      issuer: `https://dev-q0lfml8y40meyltz.us.auth0.com/`, // AKA Domain
+      audience: process.env.AUTH0_IDENTIFIER,
+      issuer: `${process.env.AUTH0_DOMAIN}/`,
       algorithms: ["RS256"],
     },
     (err, decoded) => {
       if (err) {
-        req.user = null;
+        req.authPayload = null;
         return next();
       }
-      req.user = decoded;
+      req.authPayload = decoded;
       return next();
     }
   );
@@ -64,7 +65,7 @@ const server = new ApolloServer({
   resolvers,
   context: ({ req }) => {
     return {
-      user: req.user,
+      authPayload: req.authPayload,
     };
   },
 });
