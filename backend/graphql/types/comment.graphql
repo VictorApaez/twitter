@@ -18,12 +18,7 @@ extend type Query {
 }
 
 extend type Mutation {
-  createComment(
-    postId: ID!
-    userId: ID!
-    parentId: ID
-    content: String!
-  ): Comment!
+  createComment(postId: ID!, parentId: ID, content: String!): Comment!
   updateComment(id: ID!, content: String!): Comment
   deleteComment(id: ID!): Boolean!
 }
