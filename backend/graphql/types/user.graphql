@@ -13,7 +13,6 @@ extend type Query {
 }
 
 input CreateUserInput {
-  auth0Id: String!
   displayName: String!
   bio: String
 }
