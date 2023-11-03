@@ -1,5 +1,5 @@
 import db from "../../../models/index.js";
-import resolvers from "../../../graphql/resolvers/postResolvers.js";
+import resolvers from "../../../graphql/resolvers/query/postQueries.js";
 const { Comment, User, Post } = db;
 const { post, posts } = resolvers.Query;
 import { generateID } from "../../../utils/helpers.js";
@@ -37,13 +37,13 @@ describe("post resolvers", () => {
   it("returns all posts with their comments and replies", async () => {
     const result = await posts();
     expect(result).toHaveLength(1);
-    expect(result[0].comments).toHaveLength(1);
+    expect(result[0].comments).toHaveLength(2);
   });
 
   it("returns a single post by id with comments and replies", async () => {
     const result = await post(null, { id: 1 });
     expect(result.id).toEqual(1);
-    expect(result.comments).toHaveLength(1);
+    expect(result.comments).toHaveLength(2);
   });
 
   it("returns null for a non-existent post", async () => {

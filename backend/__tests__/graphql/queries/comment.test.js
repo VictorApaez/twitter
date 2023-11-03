@@ -1,8 +1,8 @@
 import db from "../../../models/index.js";
-import resolvers from "../../../graphql/resolvers/commentResolvers.js";
+import resolvers from "../../../graphql/resolvers/query/commentQueries.js";
 const { Comment, User, Post } = db;
 const { comment } = resolvers.Query;
-import { generateID } from "../../utils/helpers.js";
+import { generateID } from "../../../utils/helpers.js";
 
 describe("comment resolver", () => {
   beforeAll(async () => {
