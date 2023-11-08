@@ -18,8 +18,35 @@ export default {
       });
     },
 
-    user: async (_, { id }) => {
+    userProfile: async (_, { id }) => {
       const user = await User.findByPk(id, {
+        attributes: ["id", "displayName", "bio"],
+        include: [
+          { model: Post, as: "posts" },
+          {
+            model: Comment,
+            as: "comments",
+            include: [
+              {
+                model: Comment,
+                as: "replies",
+                foreignKey: "parentId",
+                attributes: ["id", "content"],
+              },
+            ],
+          },
+        ],
+      });
+
+      return user;
+    },
+    myProfile: async (_, args, { authPayload }) => {
+      if (!authPayload) {
+        throw new Error("You must be authenticated to view your profile.");
+      }
+      const auth0Id = authPayload.sub;
+      const user = await User.findOne({
+        where: { auth0Id },
         include: [
           { model: Post, as: "posts" },
           {
@@ -31,6 +58,10 @@ export default {
           },
         ],
       });
+
+      if (!user) {
+        throw new Error("User not found.");
+      }
 
       return user;
     },
