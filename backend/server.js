@@ -5,7 +5,6 @@ import { typeDefs, resolvers } from "./graphql/index.js";
 import jwt from "jsonwebtoken";
 import jwksClient from "jwks-rsa";
 import dotenv from "dotenv";
-
 dotenv.config();
 
 const app = express();
@@ -49,6 +48,7 @@ function authenticate(req, res, next) {
     },
     (err, decoded) => {
       if (err) {
+        console.log("JWT Verification Error", err);
         req.authPayload = null;
         return next();
       }
