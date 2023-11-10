@@ -1,9 +1,11 @@
 "use client";
-
-import { CreatePost } from "./components/post/CreatePost";
-import React from "react";
+import { CreatePost } from "./post/CreatePost";
+import React, { useState } from "react";
 import Icon from "../../components/Icon";
-import { Post } from "./components/post/Post";
+import { Post } from "./post/Post";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import Link from "next/link";
+import { AuthModal } from "@/components/AuthModal";
 
 const posts = [
   {
@@ -84,8 +86,17 @@ const posts = [
 ];
 
 export default function Feed() {
+  const { user, error, isLoading } = useUser();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
-    <div className="max-w-xl mx-4 md:mx-auto">
+    <div className="max-w-xl mx-4 my-16 md:mx-auto">
+      <button onClick={() => setIsModalOpen(true)}>Open Modal</button>
+      <AuthModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      {user && <div>Hi, {user.name}</div>}
+      <a href="/api/auth/login">Log in</a>
+      <a href="/api/auth/logout"> LOG OUT </a>
+      <a href="/api/auth/signup">Sign Up</a>
       {/* New Post Section */}
       <CreatePost />
 
