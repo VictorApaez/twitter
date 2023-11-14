@@ -54,4 +54,10 @@ export interface CreateCommentProps {
 
 export interface PostActionButtonsProps {
   handleCommentInputFocus: () => void;
+  showComments: () => void;
 }
+
+export type ModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+};
