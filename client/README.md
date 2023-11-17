@@ -1,46 +1,47 @@
-# Twitter Clone 🐦
+# Twitter Clone Front-End
 
-A modern web application that mimics the basic functionalities of Twitter. Built with React and Next.js.
+## Overview
 
-## 🌟 Features
+This project is a front-end clone of Twitter, currently in progress, built with Next.js and React. It aims to replicate the core features of Twitter, allowing users to view a news feed, and create and edit posts, comments, and replies. Authentication is managed using Auth0, and Apollo GraphQL is used for backend communication. As this is a work in progress, additional features and improvements are being actively developed.
 
-- **Interactive Posts**: Users can engage with posts by liking, commenting, or replying.
-- **Responsive Design**: The UI adjusts seamlessly across devices of different screen sizes.
-- **SVG Icon System**: Efficient and high-quality icon system for better UI experience.
+<img width="1422" alt="twitter" src="https://github.com/VictorApaez/twitter/assets/56009643/04468635-7d2d-4092-842a-e3d569aeaa6f">
 
-## 🚀 Getting Started
+## Features
 
-### Prerequisites
+- **News Feed:** View posts from various users.
+- **User Authentication:** Managed with Auth0, users must be signed in to create or edit content.
+- **Interactive Post Features:** Users can like, comment on, and share posts.
+- **Real-time Updates:** Leverages Apollo GraphQL for real-time updates to the news feed and posts.
 
-- Node.js and npm
+## Technology Stack
 
-### Installation
+- **Next.js:** A React framework for building user-friendly and efficient web applications.
+- **React & React-DOM:** For creating interactive UIs with reusable components.
+- **Auth0:** For secure and scalable user authentication.
+- **Apollo GraphQL:** For managing data communication between the front-end and back-end.
+- **Framer Motion:** For adding smooth animations to the UI.
+- **Tailwind CSS:** A utility-first CSS framework used for styling.
+- **TypeScript:** A typed superset of JavaScript that compiles to plain JavaScript.
+- **ESLint:** For identifying and fixing problems in JavaScript code.
 
-1. **Clone the repository**:
+## Running the Project
 
-   ```sh
-   git clone https://github.com/VictorApaez/twitter.git
-   cd twitter
+1. **Clone the repository:**
+   ```bash
+    git clone https://github.com/VictorApaez/twitter
+   ```
+2. **Install dependencies:**
+   ```bash
+    npm install
+   ```
+3. **Run the development server:**
+   ```bash
+    npm run dev
    ```
 
-2. Install the dependencies
 
-   ```sh
-   npm install
-   ```
+## Contributing
+Contributions are welcome! If you would like to contribute, please fork the repository and create a new branch for your feature. Once you have made your changes, submit a pull request and we will review your changes.
 
-3. Run the development server
-
-   ```sh
-   npm run dev
-   ```
-
-Visit http://localhost:3000 in your browser to see the app in action.
-
-## 🛠 Built With
-
-- React - A JavaScript library for building user interfaces.
-
-- Next.js - A React framework with hybrid static & server rendering, smart bundling, and more.
-
-- Tailwind CSS - A utility-first CSS framework.
+## License
+This project is licensed under the MIT license.
